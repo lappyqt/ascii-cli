@@ -35,7 +35,11 @@ public sealed class CommandLineService : ICommandLineService
         {
             Argument? arg = commandArguments.FirstOrDefault(x => x.Name == args[i]);
 
-            if (arg is null) throw new Exception($"Argument not found: {args[i]}");
+            if (arg is null)
+                throw new Exception($"Argument not found: {args[i]}");
+
+            else if (parsedArguments.Any(x => x.Name == arg.Name))
+                throw new Exception($"Argument duplicate ({arg.Name})");
 
             else if (arg.Type == ArgumentValueType.NoValue)
             {

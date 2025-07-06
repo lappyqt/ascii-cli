@@ -7,7 +7,7 @@ public sealed class RootCommand : ICommand
 
     public void AddArgument(Argument arg)
     {
-        if (_arguments.Contains(arg)) throw new DuplicateWaitObjectException("Current argument has already been added to the list.");
+        if (_arguments.Any(x => x.Name == arg.Name)) throw new DuplicateWaitObjectException($"Argument {arg.Name} has already been added to the list.");
         _arguments.Add(arg);
     }
 
