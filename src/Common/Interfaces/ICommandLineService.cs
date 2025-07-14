@@ -4,5 +4,5 @@ public interface ICommandLineService
 {
     void AddSubCommand(SubCommand subCommand);
     void ParseArguments(string[] args, out Argument[] parsedArguments);
-    void InvokeCommand(Argument[] parsedArguments);
+    void InvokeCommand(in Argument[] parsedArguments);
 }

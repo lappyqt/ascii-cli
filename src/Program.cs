@@ -14,4 +14,4 @@ CommandLineService commandLineService = new CommandLineService(rootCommand);
 commandLineService.AddSubCommand(helpCommand);
 
 commandLineService.ParseArguments(args, out Argument[] parsedArguments);
-commandLineService.InvokeCommand(parsedArguments);
+commandLineService.InvokeCommand(in parsedArguments);

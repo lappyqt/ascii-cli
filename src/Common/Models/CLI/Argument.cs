@@ -12,7 +12,7 @@ public class Argument
         get => _value;
         set
         {
-            if (value != null && !IsValidValue(value)) throw new ArgumentException($"Invalid value for type {Type}");
+            if (value != null && !IsValidValue(value)) throw new InvalidArgumentValueTypeException($"Invalid value for type {Type}");
             _value = value;
         }
     }

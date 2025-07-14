@@ -20,11 +20,11 @@ public sealed class CommandLineService : ICommandLineService
             ? _subCommands.First(x => x.Name == args[0])
             : _rootCommand;
 
-        if (args.Length > 0 && _activeCommand is null) throw new NullReferenceException($"Command not found: {args[0]}");
+        if (args.Length > 0 && _activeCommand is null) throw new CommandNotFoundException($"Command not found: {args[0]}");
         parsedArguments = ParseCommandArguments(_activeCommand, args);
     }
 
-    public void InvokeCommand(Argument[] parsedArguments) => _activeCommand?.InvokeAction(parsedArguments);
+    public void InvokeCommand(in Argument[] parsedArguments) => _activeCommand?.InvokeAction(parsedArguments);
 
     private Argument[] ParseCommandArguments(ICommand command, string[] args)
     {
@@ -36,10 +36,10 @@ public sealed class CommandLineService : ICommandLineService
             Argument? arg = commandArguments.FirstOrDefault(x => x.Name == args[i]);
 
             if (arg is null)
-                throw new Exception($"Argument not found: {args[i]}");
+                throw new ArgumentNotFoundException($"Argument not found: {args[i]}");
 
             else if (parsedArguments.Any(x => x.Name == arg.Name))
-                throw new Exception($"Argument duplicate ({arg.Name})");
+                throw new DuplicateArgumentParseException($"Argument duplicate ({arg.Name})");
 
             else if (arg.Type == ArgumentValueType.NoValue)
             {
@@ -53,7 +53,7 @@ public sealed class CommandLineService : ICommandLineService
                 i++;
             }
             catch (IndexOutOfRangeException exception) {
-                throw new NullReferenceException($"No required value was set for argument {arg.Name}", exception);
+                throw new NoRequiredArgumentValueException($"No required value was set for argument {arg.Name}", exception);
             }
         }
 
