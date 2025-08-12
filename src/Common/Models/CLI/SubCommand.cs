@@ -14,11 +14,15 @@ public sealed class SubCommand : ICommand
 
     public void AddArgument(Argument arg)
     {
-        if (_arguments.Any(x => x.Name == arg.Name)) throw new DuplicateArgumentInitException($"Argument {arg.Name} has already been added to the list.");
+        if (_arguments.Any(x => x.Name == arg.Name))
+        {
+            throw new DuplicateArgumentInitException($"Argument {arg.Name} has already been added to the list.");
+        }
+
         _arguments.Add(arg);
     }
 
-    public Argument[] GetArguments() => _arguments.ToArray();
+    public Argument[] GetArguments() => [.._arguments];
     public void SetAction(Action<Argument[]> action) => _action = action;
     public void InvokeAction(in Argument[] args) => _action?.Invoke(args);
 }

@@ -4,6 +4,8 @@ public enum ArgumentValueType
 {
     String,
     Int,
+    Float,
+    Double,
     Bool,
     NoValue
 }

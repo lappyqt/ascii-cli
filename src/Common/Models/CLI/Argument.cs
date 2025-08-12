@@ -12,7 +12,10 @@ public class Argument
         get => _value;
         set
         {
-            if (value != null && !IsValidValue(value)) throw new InvalidArgumentValueTypeException($"Invalid value for type {Type}");
+            if (value != null && !IsValidValue(value))
+            {
+                throw new InvalidArgumentValueTypeException($"Invalid value for type {Type}");
+            }
             _value = value;
         }
     }
@@ -23,6 +26,8 @@ public class Argument
         {
             ArgumentValueType.String => true,
             ArgumentValueType.Int => int.TryParse(value, out _),
+            ArgumentValueType.Float => float.TryParse(value, out _),
+            ArgumentValueType.Double => double.TryParse(value, out _),
             ArgumentValueType.Bool => bool.TryParse(value, out _),
             _ => false
         };

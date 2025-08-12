@@ -20,7 +20,11 @@ public sealed class CommandLineService : ICommandLineService
             ? _subCommands.First(x => x.Name == args[0])
             : _rootCommand;
 
-        if (args.Length > 0 && _activeCommand is null) throw new CommandNotFoundException($"Command not found: {args[0]}");
+        if (args.Length > 0 && _activeCommand is null)
+        {
+            throw new CommandNotFoundException($"Command not found: {args[0]}");
+        }
+
         parsedArguments = ParseCommandArguments(_activeCommand, args);
     }
 
@@ -36,11 +40,13 @@ public sealed class CommandLineService : ICommandLineService
             Argument? arg = commandArguments.FirstOrDefault(x => x.Name == args[i]);
 
             if (arg is null)
+            {
                 throw new ArgumentNotFoundException($"Argument not found: {args[i]}");
-
+            }
             else if (parsedArguments.Any(x => x.Name == arg.Name))
+            {
                 throw new DuplicateArgumentParseException($"Argument duplicate ({arg.Name})");
-
+            }
             else if (arg.Type == ArgumentValueType.NoValue)
             {
                 parsedArguments.Add(arg);
