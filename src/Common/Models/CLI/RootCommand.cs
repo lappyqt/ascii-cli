@@ -2,7 +2,9 @@ namespace ascii_cli.Common.Models.CLI;
 
 public sealed class RootCommand : ICommand
 {
-    private List<Argument> _arguments = new ();
+    public string Name { get => "Root"; }
+
+    private List<Argument> _arguments = [];
     private Action<Argument[]>? _action;
 
     public void AddArgument(Argument arg)

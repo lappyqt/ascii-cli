@@ -2,7 +2,7 @@ namespace ascii_cli.Common.Models.CLI;
 
 public sealed class SubCommand : ICommand
 {
-    private List<Argument> _arguments = new ();
+    private List<Argument> _arguments = [];
     private Action<Argument[]>? _action;
 
     public string Name { get; init; }

@@ -2,8 +2,6 @@ namespace ascii_cli.Common.Models.CLI;
 
 public class Argument
 {
-    private string? _value;
-
     public required string Name { get; init; }
     public required ArgumentValueType Type { get; init; }
 
@@ -19,6 +17,8 @@ public class Argument
             _value = value;
         }
     }
+
+    private string? _value;
 
     private bool IsValidValue(string value)
     {
