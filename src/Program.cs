@@ -1,7 +1,7 @@
 using ascii_cli.Services;
 
 RootCommand rootCommand = new RootCommand();
-rootCommand.AddArgument(new Argument { Name = "--width", Type = ArgumentValueType.Int });
+rootCommand.AddArgument(new Argument("--width", ArgumentValueType.Int));
 rootCommand.SetAction(args => {
     Console.WriteLine("Root command used");
 });

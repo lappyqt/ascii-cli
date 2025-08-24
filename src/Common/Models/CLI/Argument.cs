@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace ascii_cli.Common.Models.CLI;
 
 public class Argument
@@ -16,6 +18,23 @@ public class Argument
             }
             _value = value;
         }
+    }
+
+    public Argument() {}
+
+    [SetsRequiredMembers]
+    public Argument(string name, ArgumentValueType type)
+    {
+        Name = name;
+        Type = type;
+    }
+
+    [SetsRequiredMembers]
+    public Argument(string name, ArgumentValueType type, string? value = null)
+    {
+        Name = name;
+        Type = type;
+        _value = value;
     }
 
     private string? _value;
