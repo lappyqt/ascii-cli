@@ -6,10 +6,17 @@ public sealed class SubCommand : ICommand
     private Action<Argument[]>? _action;
 
     public string Name { get; init; }
+    public string? Description { get; init; }
 
     public SubCommand(string name)
     {
         Name = name;
+    }
+
+    public SubCommand(string name, string description)
+    {
+        Name = name;
+        Description = description;
     }
 
     public void AddArgument(Argument arg)

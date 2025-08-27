@@ -6,6 +6,9 @@ public class Argument
 {
     public required string Name { get; init; }
     public required ArgumentValueType Type { get; init; }
+    public string? Description { get; init; }
+
+    private string? _value;
 
     public string? Value
     {
@@ -30,14 +33,21 @@ public class Argument
     }
 
     [SetsRequiredMembers]
-    public Argument(string name, ArgumentValueType type, string? value = null)
+    public Argument(string name, ArgumentValueType type, string description)
+    {
+        Name = name;
+        Type = type;
+        Description = description;
+    }
+
+    [SetsRequiredMembers]
+    public Argument(string name, ArgumentValueType type, string? value = null, string? description = null)
     {
         Name = name;
         Type = type;
         _value = value;
+        Description = description;
     }
-
-    private string? _value;
 
     private bool IsValidValue(string value)
     {
